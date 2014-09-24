@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from subprocess import call
 
 class MainWindow(QtGui.QMainWindow):
+    matrizAdjacencia = []
 
     def alert(self):
         QtGui.QMessageBox.about(self, "TESTE", "TESTE")
@@ -25,9 +26,20 @@ class MainWindow(QtGui.QMainWindow):
         self.comboVertice2.addItem(text)
 
     def addConexao(self):
-        conexao = self.comboVertice1.currentText() + '|' + self.comboAresta.currentText() + '|' + self.comboVertice2.currentText()
+        peso = int(self.linePesoNo.text())
+        if not peso:
+            peso = 1       
+        conexao = self.comboVertice1.currentText() + '|' + self.comboAresta.currentText() + '|' + self.comboVertice2.currentText() + '|' + str(peso)
         self.modelConexao.appendRow(QStandardItem(conexao))
         self.listConexoes.setModel(self.modelConexao)
+
+    def gerar(self):
+        itens = []
+
+        for indice in range(self.modelConexao.rowCount()):
+             itens.append(self.modelConexao.item(indice))
+
+        print(itens)
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -40,6 +52,7 @@ class MainWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.pushAddVertice, QtCore.SIGNAL("clicked()"), self.addVertice)
         QtCore.QObject.connect(self.pushAddAresta, QtCore.SIGNAL("clicked()"), self.addAresta)
         QtCore.QObject.connect(self.pushAddConexao, QtCore.SIGNAL("clicked()"), self.addConexao)
+        QtCore.QObject.connect(self.pushGerar, QtCore.SIGNAL("clicked()"), self.gerar)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
