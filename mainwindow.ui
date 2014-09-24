@@ -48,7 +48,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -104,7 +104,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -160,7 +160,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -189,12 +189,12 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>210</y>
-        <width>241</width>
+        <width>248</width>
         <height>31</height>
        </rect>
       </property>
@@ -211,11 +211,6 @@
       </layout>
      </widget>
     </widget>
-    <zorder>groupBox_2</zorder>
-    <zorder>groupBox_3</zorder>
-    <zorder>groupBox_4</zorder>
-    <zorder>pushAddVertice_2</zorder>
-    <zorder>pushAddVertice</zorder>
    </widget>
    <widget class="QPushButton" name="pushGerar">
     <property name="geometry">
@@ -230,7 +225,7 @@
      <string>Gerar</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -387,12 +382,12 @@
           <string>Adjacência dos nós</string>
          </property>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>180</x>
            <y>210</y>
-           <width>111</width>
+           <width>164</width>
            <height>27</height>
           </rect>
          </property>
@@ -406,15 +401,11 @@
          </layout>
         </widget>
        </widget>
-       <zorder>checkDirecionado</zorder>
-       <zorder>groupBox_6</zorder>
-       <zorder></zorder>
-       <zorder>groupBox_6</zorder>
       </widget>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -425,7 +416,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout"/>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -474,22 +465,22 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSair">
    <property name="text">
-    <string>Sair</string>
+    <string>&amp;Sair</string>
    </property>
   </action>
   <action name="actionVai_se_fuder">
    <property name="text">
-    <string>Vai se fuder</string>
+    <string>&amp;Vai se fuder</string>
    </property>
   </action>
   <action name="actionSobre">
    <property name="text">
-    <string>Sobre</string>
+    <string>&amp;Sobre</string>
    </property>
   </action>
   <action name="actionNovo">
    <property name="text">
-    <string>Novo</string>
+    <string>&amp;Novo</string>
    </property>
   </action>
  </widget>
