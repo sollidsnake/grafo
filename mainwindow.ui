@@ -194,7 +194,7 @@
        <rect>
         <x>0</x>
         <y>210</y>
-        <width>248</width>
+        <width>241</width>
         <height>31</height>
        </rect>
       </property>
@@ -387,7 +387,7 @@
           <rect>
            <x>180</x>
            <y>210</y>
-           <width>164</width>
+           <width>111</width>
            <height>27</height>
           </rect>
          </property>
@@ -448,7 +448,6 @@
     <property name="title">
      <string>A&amp;juda</string>
     </property>
-    <addaction name="actionVai_se_fuder"/>
     <addaction name="actionSobre"/>
    </widget>
    <addaction name="menuArquivo"/>

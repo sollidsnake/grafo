@@ -7,7 +7,7 @@ from subprocess import call
 class MainWindow(QtGui.QMainWindow):
 
     def alert(self):
-        QtGui.QMessageBox.about(self, "PORRA", "VAO SE FODEREM")
+        QtGui.QMessageBox.about(self, "TESTE", "TESTE")
 
     def addVertice(self):
         vertice = self.lineNomeVertice.text()
