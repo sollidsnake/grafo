@@ -3,7 +3,6 @@ from PyQt4 import QtCore, QtGui, uic
 from PyQt4.QtGui import *
 from subprocess import call
 
-
 class MainWindow(QtGui.QMainWindow):
 
     def alert(self):
@@ -26,7 +25,9 @@ class MainWindow(QtGui.QMainWindow):
         self.comboVertice2.addItem(text)
 
     def addConexao(self):
-        pass
+        conexao = self.comboVertice1.currentText() + '|' + self.comboAresta.currentText() + '|' + self.comboVertice2.currentText()
+        self.modelConexao.appendRow(QStandardItem(conexao))
+        self.listConexoes.setModel(self.modelConexao)
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -38,6 +39,7 @@ class MainWindow(QtGui.QMainWindow):
         self.show()
         QtCore.QObject.connect(self.pushAddVertice, QtCore.SIGNAL("clicked()"), self.addVertice)
         QtCore.QObject.connect(self.pushAddAresta, QtCore.SIGNAL("clicked()"), self.addAresta)
+        QtCore.QObject.connect(self.pushAddConexao, QtCore.SIGNAL("clicked()"), self.addConexao)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
