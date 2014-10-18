@@ -1,0 +1,5 @@
+rg
+cpf
+comprovante residencia
+2 grau
+graduacao
