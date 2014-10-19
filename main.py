@@ -1,60 +1,23 @@
+from PyQt4.QtGui import QApplication
 import sys
-from PyQt4 import QtCore, QtGui, uic
-from PyQt4.QtGui import *
-from subprocess import call
-
-class MainWindow(QtGui.QMainWindow):
-    matrizAdjacencia = []
-
-    def alert(self):
-        QtGui.QMessageBox.about(self, "TESTE", "TESTE")
-
-    def addVertice(self):
-        vertice = self.lineNomeVertice.text()
-        self.modelVertice.appendRow(QStandardItem(vertice))
-        self.listVertices.setModel(self.modelVertice)
-        self.addToComboVertice(vertice)
-
-    def addAresta(self):
-        aresta = self.lineNomeAresta.text()
-        self.modelAresta.appendRow(QStandardItem(aresta))
-        self.listArestas.setModel(self.modelAresta)
-        self.comboAresta.addItem(aresta)
-
-    def addToComboVertice(self, text):
-        self.comboVertice1.addItem(text)
-        self.comboVertice2.addItem(text)
-
-    def addConexao(self):
-        peso = int(self.linePesoNo.text())
-        if not peso:
-            peso = 1       
-        conexao = self.comboVertice1.currentText() + '|' + self.comboAresta.currentText() + '|' + self.comboVertice2.currentText() + '|' + str(peso)
-        self.modelConexao.appendRow(QStandardItem(conexao))
-        self.listConexoes.setModel(self.modelConexao)
-
-    def gerar(self):
-        itens = []
-
-        for indice in range(self.modelConexao.rowCount()):
-             itens.append(self.modelConexao.item(indice))
-
-        print(itens)
-
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        uic.loadUi('mainwindow.ui', self)
-        self.modelVertice = QStandardItemModel(self.listVertices)
-        self.modelAresta = QStandardItemModel(self.listArestas)
-        self.modelConexao = QStandardItemModel(self.listConexoes)
-
-        self.show()
-        QtCore.QObject.connect(self.pushAddVertice, QtCore.SIGNAL("clicked()"), self.addVertice)
-        QtCore.QObject.connect(self.pushAddAresta, QtCore.SIGNAL("clicked()"), self.addAresta)
-        QtCore.QObject.connect(self.pushAddConexao, QtCore.SIGNAL("clicked()"), self.addConexao)
-        QtCore.QObject.connect(self.pushGerar, QtCore.SIGNAL("clicked()"), self.gerar)
+from mainwindow import MainWindow
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     window = MainWindow()
+
+    # inserir para teste
+    window.addAresta('a')
+    window.addAresta('b')
+    window.addAresta('c')
+    window.addVertice('1')
+    window.addVertice('2')
+    window.addVertice('3')
+    window.addConexao('1', 'a', '2')
+    window.addConexao('1', 'b', '3')
+    window.addConexao('3', 'c', '3')
+
+    # chama a janela
+    window.show()
+
     sys.exit(app.exec_())

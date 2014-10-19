@@ -143,7 +143,7 @@
       <rect>
        <x>390</x>
        <y>20</y>
-       <width>241</width>
+       <width>251</width>
        <height>291</height>
       </rect>
      </property>
@@ -256,9 +256,9 @@
        <widget class="QGroupBox" name="groupBox_6">
         <property name="geometry">
          <rect>
-          <x>300</x>
+          <x>190</x>
           <y>0</y>
-          <width>296</width>
+          <width>371</width>
           <height>309</height>
          </rect>
         </property>
@@ -434,7 +434,7 @@
      <x>0</x>
      <y>0</y>
      <width>722</width>
-     <height>23</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArquivo">
@@ -484,6 +484,35 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>listVertices</tabstop>
+  <tabstop>lineNomeVertice</tabstop>
+  <tabstop>pushAddVertice</tabstop>
+  <tabstop>pushRemoverVertice</tabstop>
+  <tabstop>listArestas</tabstop>
+  <tabstop>lineNomeAresta</tabstop>
+  <tabstop>pushAddAresta</tabstop>
+  <tabstop>pushRemoverAresta</tabstop>
+  <tabstop>listConexoes</tabstop>
+  <tabstop>comboVertice1</tabstop>
+  <tabstop>comboAresta</tabstop>
+  <tabstop>comboVertice2</tabstop>
+  <tabstop>linePesoNo</tabstop>
+  <tabstop>pushAddConexao</tabstop>
+  <tabstop>checkDirecionado</tabstop>
+  <tabstop>checkExisteLaco</tabstop>
+  <tabstop>checkExisteParalela</tabstop>
+  <tabstop>checkExisteIsolado</tabstop>
+  <tabstop>checkOrdem</tabstop>
+  <tabstop>checkExisteCiclo</tabstop>
+  <tabstop>checkConexo</tabstop>
+  <tabstop>checkCaminhoCurto</tabstop>
+  <tabstop>comboCaminhoInicio</tabstop>
+  <tabstop>comboBox_5</tabstop>
+  <tabstop>checkGrau</tabstop>
+  <tabstop>checkAdjacencia</tabstop>
+  <tabstop>pushGerar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
