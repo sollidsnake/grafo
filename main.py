@@ -1,7 +1,6 @@
 from PyQt4.QtGui import QApplication
 import sys
 from mainwindow import MainWindow
-import funcoes-grafo
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
