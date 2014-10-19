@@ -12,4 +12,4 @@ grafo.addConexao('1', 'a', '2')
 grafo.addConexao('2', 'b', '3')
 grafo.addConexao('3', 'c', '1')
 
-print(grafo.procuraLigacao('1', '3')[1])
+print(grafo.procuraLigacao('1', '3'))
