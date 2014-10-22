@@ -30,10 +30,10 @@ class Grafo(object):
     def getConexoes(self):
         return self.conexoes
 
-    def procuraLaco(self):
+    def getLaco(self):
         for v1, a, v2 in self.conexoes:
             peso = self.conexoes[(v1, a, v2)]
             if v1 == v2 and peso != 0:
-                return True
-
-        return False
+                l = 'Aresta '+a+' em: '+v1
+                self.lacos.append(l)
+        return self.lacos
