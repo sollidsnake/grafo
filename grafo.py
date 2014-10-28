@@ -37,10 +37,11 @@ class Grafo(object):
     def getConexoes(self):
         return self.conexoes
 
-    def procuraLaco(self):
+    def getLaco(self):
         for v1, a, v2 in self.conexoes:
             peso = self.conexoes[v1, a, v2]
             if v1 == v2 and peso != 0:
+<<<<<<< HEAD
                 return True
 
         return False
@@ -62,3 +63,8 @@ class Grafo(object):
         for ligacao in ligacoes:
             encontrado = self.procuraCaminho(ligacao, v2, nosVisitados)
             if encontrado: return True
+=======
+                l = 'Aresta '+a+' em: '+v1
+                self.lacos.append(l)
+        return self.lacos
+>>>>>>> 60896c1f38dff63ad0ce8657fa368ab707298883
