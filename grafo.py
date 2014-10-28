@@ -3,6 +3,7 @@ class Grafo(object):
     arestas = []
     conexoes = {}
     lacos = []
+    matrizIncidencia = {}
 
     def __init__(self, matriz=None):
         if matriz:
@@ -23,17 +24,41 @@ class Grafo(object):
 
         return False
 
-    def addConexao(self, v1, aresta, v2, peso = 1):
-        self.conexoes[(v1, aresta, v2)] = peso
-        self.conexoes[(v2, aresta, v1)] = peso
+    def addConexao(self, v1, aresta, v2, peso = 1, direcionado=False):
+        self.conexoes[v1, aresta, v2] = peso
+        if direcionado:
+            self.conexoes[v2, aresta, v1] = peso * -1
+        else:
+            self.conexoes[v2, aresta, v1] = peso
+
+        self.matrizIncidencia[v1, aresta] = peso
+        self.matrizIncidencia[v2, aresta] = peso
 
     def getConexoes(self):
         return self.conexoes
 
     def procuraLaco(self):
         for v1, a, v2 in self.conexoes:
-            peso = self.conexoes[(v1, a, v2)]
+            peso = self.conexoes[v1, a, v2]
             if v1 == v2 and peso != 0:
                 return True
 
         return False
+
+    def procuraCaminho(self, v1, v2, nosVisitados=[]):
+        ligacoes = []
+
+        for v3, a, v4 in self.conexoes:
+            peso = self.conexoes[v3, a, v4]
+            if peso < 0: continue
+            if v1 == v3:
+                if v4 == v2:
+                    return True
+
+                if v4 not in nosVisitados:
+                    ligacoes.append(v4)
+                    nosVisitados.append(v4)
+
+        for ligacao in ligacoes:
+            encontrado = self.procuraCaminho(ligacao, v2, nosVisitados)
+            if encontrado: return True
