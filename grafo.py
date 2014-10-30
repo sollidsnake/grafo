@@ -1,3 +1,5 @@
+import pdb
+
 class Grafo(object):
     vertices = []
     arestas = []
@@ -62,3 +64,47 @@ class Grafo(object):
         for ligacao in ligacoes:
             encontrado = self.procuraCaminho(ligacao, v2, nosVisitados)
             if encontrado: return True
+
+        return False
+
+    def procuraArestaParalela(self):
+        ligacoes = {}
+        for v3, a, v4 in self.conexoes:
+            if (v3, v4) not in ligacoes.keys():
+                ligacoes[v3, v4] = 1
+            else: return True
+
+        return False
+
+
+    def procuraVerticeIsolado(self):
+
+        for v in self.vertices:
+            for v1, a, v2 in self.conexoes:
+                isolado = True
+                if v1 == v:
+                    isolado = False
+                    break
+
+        if isolado: return True
+
+        return False
+
+
+    def getOrdem(self):
+        return len(self.vertices)
+
+    def getGrau(self, v):
+        grau = 0
+        for v1, a, v2 in self.conexoes:
+            peso = self.conexoes[v1, a, v2]
+            if v1 == v and peso > 0: grau += 1
+
+        return grau
+
+    def getTodosGraus(self):
+        graus = {}
+        for v in self.vertices:
+            graus[v] = self.getGrau(v)
+
+        return graus
