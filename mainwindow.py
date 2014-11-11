@@ -3,6 +3,8 @@ from PyQt4.QtGui import *
 from subprocess import call
 from grafo import Grafo
 
+from Resultado import Resultado
+
 class MainWindow(QMainWindow):
     matrizAdjacencia = {}
     grafo = Grafo()
@@ -50,10 +52,15 @@ class MainWindow(QMainWindow):
 
         print(self.matrizAdjacencia)
 
+        resultado = Resultado("test", self)
+        resultado.show()
 
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi('mainwindow.ui', self)
+
+        self.listVertices.setEditTriggers(QApplication.NoEditTriggers)
+
         self.modelVertice = QStandardItemModel(self.listVertices)
         self.modelAresta = QStandardItemModel(self.listArestas)
         self.modelConexao = QStandardItemModel(self.listConexoes)
