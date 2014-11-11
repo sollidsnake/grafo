@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from PyQt4.QtGui import QApplication
 import sys
 from mainwindow import MainWindow
