@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>722</width>
+    <width>767</width>
     <height>734</height>
    </rect>
   </property>
@@ -46,6 +46,9 @@
         <width>161</width>
         <height>171</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
@@ -103,6 +106,9 @@
         <height>171</height>
        </rect>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -159,6 +165,9 @@
         <height>171</height>
        </rect>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -194,7 +203,7 @@
        <rect>
         <x>0</x>
         <y>210</y>
-        <width>263</width>
+        <width>248</width>
         <height>31</height>
        </rect>
       </property>
@@ -396,7 +405,7 @@
            <widget class="QComboBox" name="comboCaminhoInicio"/>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_5"/>
+           <widget class="QComboBox" name="comboCaminhoFim"/>
           </item>
          </layout>
         </widget>
@@ -433,8 +442,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>722</width>
-     <height>23</height>
+     <width>767</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArquivo">
@@ -499,7 +508,7 @@
   <tabstop>checkConexo</tabstop>
   <tabstop>checkCaminhoCurto</tabstop>
   <tabstop>comboCaminhoInicio</tabstop>
-  <tabstop>comboBox_5</tabstop>
+  <tabstop>comboCaminhoFim</tabstop>
   <tabstop>checkGrau</tabstop>
   <tabstop>checkAdjacencia</tabstop>
   <tabstop>pushGerar</tabstop>

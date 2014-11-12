@@ -1,22 +1,17 @@
 from grafo import Grafo
+from mwui import Ui_MainWindow
+from PyQt4.QtGui import QMainWindow, QWidget
+import sys
 
-grafo = Grafo()
-grafo.addAresta('a')
-grafo.addAresta('b')
-grafo.addAresta('c')
-grafo.addAresta('d')
-grafo.addAresta('e')
-grafo.addAresta('f')
-grafo.addVertice('1')
-grafo.addVertice('2')
-grafo.addVertice('3')
-grafo.addVertice('4')
-grafo.addVertice('5')
-grafo.addConexao('1', 'a', '2', 1)
-grafo.addConexao('1', 'f', '2', 1)
-grafo.addConexao('2', 'b', '4', 1)
-grafo.addConexao('3', 'c', '4', 1)
-grafo.addConexao('1', 'd', '4', 1)
-grafo.addConexao('1', 'e', '3', 1)
+from PyQt4.QtGui import QApplication
 
-print(grafo.getTodosGraus())
+class test(QMainWindow, Ui_MainWindow):
+
+    def __init__(self, parent=None, name=None, fl=0):
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+
+w = test()
+w.show()
+a = QApplication(sys.argv)
+a.exec()

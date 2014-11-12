@@ -26,6 +26,14 @@ class Grafo(object):
 
         return False
 
+    def setDirecionado(self, direcionado):
+        if direcionado == True:
+            for v1, a, v2 in self.conexoes:
+                peso = self.conexoes[v1, a, v2]
+                if peso > 0:
+                    pesoReverso = peso * -1
+                    self.conexoes[v2, a, v1] = pesoReverso
+
     def addConexao(self, v1, aresta, v2, peso = 1, direcionado=False):
         self.conexoes[v1, aresta, v2] = peso
         if direcionado:
@@ -39,7 +47,7 @@ class Grafo(object):
     def getConexoes(self):
         return self.conexoes
 
-    def getLaco(self):
+    def existeLaco(self):
         for v1, a, v2 in self.conexoes:
             peso = self.conexoes[v1, a, v2]
             if v1 == v2 and peso != 0:
@@ -47,7 +55,7 @@ class Grafo(object):
 
         return False
 
-    def procuraCaminho(self, v1, v2, nosVisitados=[]):
+    def existeCaminho(self, v1, v2, nosVisitados=[]):
         ligacoes = []
 
         for v3, a, v4 in self.conexoes:
@@ -62,12 +70,12 @@ class Grafo(object):
                     nosVisitados.append(v4)
 
         for ligacao in ligacoes:
-            encontrado = self.procuraCaminho(ligacao, v2, nosVisitados)
+            encontrado = self.existeCaminho(ligacao, v2, nosVisitados)
             if encontrado: return True
 
         return False
 
-    def procuraArestaParalela(self):
+    def existeArestaParalela(self):
         ligacoes = {}
         for v3, a, v4 in self.conexoes:
             if (v3, v4) not in ligacoes.keys():
@@ -77,7 +85,7 @@ class Grafo(object):
         return False
 
 
-    def procuraVerticeIsolado(self):
+    def existeVerticeIsolado(self):
 
         for v in self.vertices:
             for v1, a, v2 in self.conexoes:
