@@ -138,21 +138,53 @@ class Grafo(object):
 
     def existeCiclo(self, destino):
 
-        caminhosTentados = []
-        caminhoAtual = []
+        # caminhosTentados = []
+        # caminhoAtual = []
         arestasVisitadas = []
         vertList = [destino]
-        vertBlackList = []
-        adjacentesHistory = {}
+        # vertBlackList = []
+        adjacentesList = {}
         vertNumTentativas = {}
+
+        # se tem laco existe ciclo
+        if self.existeLaco(): return True
+
+        for v in self.vertices:
+            adjacentes = self.getAdjacentes(v)
+            adjacentesList[v] = []
+            for arestaAdj, vertAdj in adjacentes:
+                adjacentesList[v].append(vertAdj)
 
         def buscaCiclo(vertice):
             print(vertice)
-            pdb.set_trace()
-
+            if vertice == destino and len(vertList) > 2: return True
             adjacentes = self.getAdjacentes(vertice)
-            adjacentesHistory[vertice] = adjacentes
             for arestaAdj, vertAdj in adjacentes:
+                semCaminho = False
+                if arestaAdj in arestasVisitadas:
+                    semCaminho = True
+                    continue
+
+                # try: vertNumTentativas[vertice] += 1
+                # except: vertNumTentativas[vertice] = 1
+
+                vertList.append(vertAdj)
+                arestasVisitadas.append(arestaAdj)
                 return buscaCiclo(vertAdj)
+
+            if semCaminho:
+                if len(vertList) > 1:
+                    vertList.pop()
+
+                vertTmp = vertList[len(vertList)-1]
+
+                try: vertNumTentativas[vertTmp] += 1 
+                except: vertNumTentativas[vertTmp] = 1 
+
+                if vertNumTentativas[vertTmp] > len(adjacentesList[vertTmp]):
+                    return False
+
+                return buscaCiclo(vertTmp)
+            return False
 
         return buscaCiclo(destino)
