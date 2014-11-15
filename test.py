@@ -1,17 +1,23 @@
 from grafo import Grafo
-from mwui import Ui_MainWindow
-from PyQt4.QtGui import QMainWindow, QWidget
-import sys
 
-from PyQt4.QtGui import QApplication
+grafo = Grafo()
 
-class test(QMainWindow, Ui_MainWindow):
+grafo.addVertice('1')
+grafo.addVertice('2')
+grafo.addVertice('3')
+grafo.addVertice('4')
+grafo.addVertice('5')
 
-    def __init__(self, parent=None, name=None, fl=0):
-        Ui_MainWindow.__init__(self)
-        self.setupUi(self)
+grafo.addAresta('a')
+grafo.addAresta('b')
+grafo.addAresta('c')
+grafo.addAresta('d')
+grafo.addAresta('e')
 
-w = test()
-w.show()
-a = QApplication(sys.argv)
-a.exec()
+grafo.addConexao('1', 'a', '2')
+grafo.addConexao('1', 'b', '5')
+grafo.addConexao('2', 'c', '5')
+grafo.addConexao('1', 'd', '3')
+grafo.addConexao('5', 'e', '4')
+
+print(grafo.existeCiclo('4'))

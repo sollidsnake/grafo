@@ -2,9 +2,18 @@ from PyQt4 import QtCore, uic
 from PyQt4.QtGui import *
 from subprocess import call
 from grafo import Grafo
-from mwui import Ui_MainWindow
+from uis.uiMainwindow import Ui_MainWindow
+from sobre import SobreUi
+import pdb
 
-from Resultado import Resultado
+from resultado import Resultado
+
+def debug_trace():
+    '''Set a tracepoint in the Python debugger that works with Qt'''
+    from PyQt4.QtCore import pyqtRemoveInputHook
+    from pdb import set_trace
+    pyqtRemoveInputHook()
+    set_trace()
 
 class MainWindow(Ui_MainWindow):
     matrizAdjacencia = {}
@@ -44,8 +53,14 @@ class MainWindow(Ui_MainWindow):
         self.listConexoes.setModel(self.modelConexao)
 
     def buttonAddConexao(self):
-        peso = int(self.linePesoNo.text())
-        v1, aresta, v2, peso = self.comboVertice1.currentText(), self.comboAresta.currentText(), self.comboVertice2.currentText(), str(peso)
+        try:
+            peso = int(self.linePesoNo.text())
+        except:
+            peso = 1
+
+        v1, v2 = self.comboVertice1.currentText(), self.comboVertice2.currentText()
+        aresta, peso = self.comboAresta.currentText(), str(peso)
+
         self.addConexao(v1, aresta, v2, peso)
 
     def gerar(self):
@@ -56,6 +71,8 @@ class MainWindow(Ui_MainWindow):
 
         if self.checkDirecionado.isChecked():
             self.grafo.setDirecionado(True)
+        else:
+            self.grafo.setDirecionado(False)
 
         if self.checkExisteLaco.isChecked():
             if self.grafo.existeLaco():
@@ -100,12 +117,71 @@ class MainWindow(Ui_MainWindow):
             resList.append("")
 
         resultado = Resultado("\n".join(resList), self.qmw)
-        resultado.show()
+        resultado.centerToMainWindow()
+        self.resultados.append(resultado)
+
+    def buttonRemoveVertice(self):
+        index = self.listVertices.currentIndex()
+        text = self.modelVertice.itemFromIndex(index).text()
+        self.removeVertice({'index': index.row(), 'value': text})
+
+    def removeVertice(self, v):
+        self.grafo.removeVertice(v['value'])
+        self.modelVertice.removeRow(v['index'])
+
+        eraseFrom = [self.comboVertice1,self.comboVertice2,self.comboCaminhoInicio,self.comboCaminhoFim]
+        for combo in eraseFrom:
+            combo.removeItem(combo.findText(v['value']))
+
+        # for i in self.comboVertice1.count():
+            # pass
+
+        toErase = []
+        for i in range(self.modelConexao.rowCount()):
+            item = self.modelConexao.item(i)
+            values = item.text().split('|')
+            if values[0] == str(v['value']) or values[2] == str(v['value']):
+                toErase.append(item)
+
+        for item in toErase:
+            index = self.modelConexao.indexFromItem(item)
+            if False: index = QStandardItem
+            self.modelConexao.removeRow(index.row())
+
+    def removeConexao(self, a):
+        self.grafo.removeConexao(a['value'])
+        self.modelConexao.removeRow(a['index'])
+
+    def removeAresta(self, a):
+        self.grafo.removeAresta(a['value'])
+        self.modelAresta.removeRow(a['index'])
+
+        self.comboAresta.removeItem(self.comboVertice2.findText(v['value']))
+
+        toErase = []
+        for i in range(self.modelConexao.rowCount()):
+            item = self.modelConexao.item(i)
+            values = item.text().split('|')
+            if values[1] == str(a['value']):
+                toErase.append(item)
+
+        for item in toErase:
+            index = self.modelConexao.indexFromItem(item)
+            if False: index = QStandardItem
+            self.modelConexao.removeRow(index.row())
+
+    def listVerticesClicked(self, model):
+        if False: model = QStandardItem
+        self.modelVertice.removeRow(model.row())
 
     def __init__(self, qmw, parent=None, name=None, fl=0):
+        if False: qmw = QMainWindow
+        self.resultados = []
         Ui_MainWindow.__init__(self)
         Ui_MainWindow.setupUi(self, qmw)
         self.qmw = qmw
+
+        self.menuArquivo.setTitle("&Arquivo")
 
         # uic.loadUi('mainwindow.ui', self)
 
@@ -115,10 +191,51 @@ class MainWindow(Ui_MainWindow):
         self.modelAresta = QStandardItemModel(self.listArestas)
         self.modelConexao = QStandardItemModel(self.listConexoes)
 
-        QtCore.QObject.connect(self.pushAddVertice, QtCore.SIGNAL("clicked()"), self.buttonAddVertice)
-        QtCore.QObject.connect(self.pushAddAresta, QtCore.SIGNAL("clicked()"), self.buttonAddAresta)
-        QtCore.QObject.connect(self.pushAddConexao, QtCore.SIGNAL("clicked()"), self.buttonAddConexao)
+        self.sobreUi = SobreUi(self.qmw)
+        self.sobreUi.tbAbout.setText("desenvolvido por mim")
+
+        self.events()
+
+    def buttonRemoveAresta(self):
+        index = self.listArestas.currentIndex()
+        text = self.modelAresta.itemFromIndex(index).text()
+        self.removeAresta({'index': index.row(), 'value': text})
+
+    def buttonRemoveConexao(self):
+        index = self.listConexoes.currentIndex()
+        text = self.modelConexao.itemFromIndex(index).text()
+        self.removeConexao({'index': index.row(), 'value': text})
+
+    def events(self):
+        QtCore.QObject.connect(self.pushAddVertice,
+                               QtCore.SIGNAL("clicked()"),
+                               self.buttonAddVertice)
+        QtCore.QObject.connect(self.pushAddAresta,
+                               QtCore.SIGNAL("clicked()"),
+                               self.buttonAddAresta)
+        QtCore.QObject.connect(self.pushAddConexao,
+                               QtCore.SIGNAL("clicked()"),
+                               self.buttonAddConexao)
+        QtCore.QObject.connect(self.pushRemoverVertice,
+                               QtCore.SIGNAL("clicked()"),
+                               self.buttonRemoveVertice)
+        QtCore.QObject.connect(self.pushRemoverAresta,
+                               QtCore.SIGNAL("clicked()"),
+                               self.buttonRemoveAresta)
+        QtCore.QObject.connect(self.pushRemoveConexao,
+                               QtCore.SIGNAL("clicked()"),
+                               self.buttonRemoveConexao)
+
         QtCore.QObject.connect(self.pushGerar, QtCore.SIGNAL("clicked()"), self.gerar)
+        self.actionSobre.triggered.connect(self.showSobreUi)
+        self.actionSair.triggered.connect(self.sair)
+
+    def showSobreUi(self):
+        self.sobreUi.show()
+        self.sobreUi.centerToMainWindow()
+
+    def sair(self):
+        self.qmw.close()
 
     def show(self):
         super().show()

@@ -3,7 +3,7 @@
 from PyQt4.QtGui import QApplication, QMainWindow
 import sys
 from mainwindow import MainWindow
-from Resultado import Resultado
+from resultado import Resultado
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

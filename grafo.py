@@ -116,3 +116,43 @@ class Grafo(object):
             graus[v] = self.getGrau(v)
 
         return graus
+
+    def getAdjacentes(self, v):
+        adjacentes = []
+
+        for v1, a, v2 in self.conexoes:
+            if v1 == v:
+                adjacentes.append((a, v2))
+
+        return adjacentes
+
+    def getGrafoPadrao(self):
+        grafo = {}
+
+        for v in self.vertices:
+            grafo[v] = []
+            for arestaAdj, vertAdj in self.getAdjacentes(v):
+                grafo[v].append(vertAdj)
+
+        return grafo
+
+    def existeCiclo(self, destino):
+
+        caminhosTentados = []
+        caminhoAtual = []
+        arestasVisitadas = []
+        vertList = [destino]
+        vertBlackList = []
+        adjacentesHistory = {}
+        vertNumTentativas = {}
+
+        def buscaCiclo(vertice):
+            print(vertice)
+            pdb.set_trace()
+
+            adjacentes = self.getAdjacentes(vertice)
+            adjacentesHistory[vertice] = adjacentes
+            for arestaAdj, vertAdj in adjacentes:
+                return buscaCiclo(vertAdj)
+
+        return buscaCiclo(destino)
