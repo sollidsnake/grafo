@@ -177,7 +177,7 @@ class MainWindow(Ui_MainWindow):
         self.grafo.removeAresta(a['value'])
         self.modelAresta.removeRow(a['index'])
 
-        self.comboAresta.removeItem(self.comboVertice2.findText(v['value']))
+        self.comboAresta.removeItem(self.comboVertice2.findText(a['value']))
 
         toErase = []
         for i in range(self.modelConexao.rowCount()):

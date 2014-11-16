@@ -27,7 +27,7 @@ class Grafo(object):
                 self.conexoes.pop((v1, a, v2))
 
     def removeAresta(self, aresta):
-        self.arestas.remove(v)
+        self.arestas.remove(aresta)
 
         conexoesTmp = deepcopy(self.conexoes)
 
