@@ -59,7 +59,7 @@ class MainWindow(Ui_MainWindow):
             peso = 1
 
         v1, v2 = self.comboVertice1.currentText(), self.comboVertice2.currentText()
-        aresta, peso = self.comboAresta.currentText(), str(peso)
+        aresta = self.comboAresta.currentText()
 
         self.addConexao(v1, aresta, v2, peso)
 
@@ -76,45 +76,66 @@ class MainWindow(Ui_MainWindow):
 
         if self.checkExisteLaco.isChecked():
             if self.grafo.existeLaco():
-                resList.append("Existem lacos no grafo.")
+                resList.append("- Existem lacos no grafo.")
             else:
-                resList.append("Nao existem lacos no grafo.")
+                resList.append("- Nao existem lacos no grafo.")
 
         if self.checkExisteParalela.isChecked():
             if self.grafo.existeArestaParalela():
-                resList.append("Existem arestas paralelas")
+                resList.append("- Existem arestas paralelas")
             else:
-                resList.append("Nao existem arestas paralelas")
+                resList.append("- Nao existem arestas paralelas")
 
         if self.checkExisteIsolado.isChecked():
             if self.grafo.existeVerticeIsolado():
-                resList.append("Existem vertices isolados")
+                resList.append("- Existem vertices isolados")
             else:
-                resList.append("Nao existem vertices isolados")
+                resList.append("- Nao existem vertices isolados")
 
         if self.checkOrdem.isChecked():
-            resList.append("Ordem do grafo: " + str(self.grafo.getOrdem()))
+            resList.append("- Ordem do grafo: " + str(self.grafo.getOrdem()))
 
         if self.checkExisteCiclo.isChecked():
-            resList.append("Ciclos ainda nao implementado")
+            ciclos = self.grafo.getCiclos()
+
+            if ciclos:
+                resList.append("- Existe(m) ciclo(s) para o(s) vértice(s): " + ", ".join(ciclos))
+            else:
+                resList.append("- Nao existem ciclos no grafo")
 
         if self.checkConexo.isChecked():
-            resList.append("Grafo conexo ainda nao implementado")
+            if self.grafo.isConexo():
+                resList.append("- Grafo é conexo")
+            else:
+                resList.append("- Grafo não é conexo")
 
         if self.checkCaminhoCurto.isChecked():
             v1 = self.comboCaminhoInicio.currentText()
             v2 = self.comboCaminhoFim.currentText()
-            if self.grafo.existeCaminho(v1, v2):
-                resList.append("Existe caminho entre o nó '" + v1 + "' e '" + v2 +"'")
+            if self.grafo.existeCaminho(v1, v2, []):
+                resList.append("- Existe caminho entre o vértice '" + v1 + "' e '" + v2 +"'")
             else:
-                resList.append("Nao existe caminho entre o nó '" + v1 + "' e '" + v2 +"'")
+                resList.append("- Nao existe caminho entre o vértice '" + v1 + "' e '" + v2 +"'")
 
         if self.checkGrau.isChecked():
             graus = self.grafo.getTodosGraus()
-            resList.append("Grau de cada no:")
+            resList.append("- Grau de cada vértice:")
             for v in graus.keys():
-                resList.append("'" + v + "':" + str(graus[v]))
+                resList.append("  '" + v + "':" + str(graus[v]))
             resList.append("")
+
+        if self.checkAdjacencia.isChecked():
+            adjacencias = self.grafo.getTodasAdjacencias()
+            resList.append("- Adjacências de cada vértice:")
+            for v in adjacencias.keys():
+                strAdj = "" + v + ": "
+                verticesAdj = []
+                for arestaAdj, vertAdj in adjacencias[v]:
+                    verticesAdj.append(vertAdj)
+                if verticesAdj:
+                    resList.append(strAdj + ", ".join(verticesAdj))
+                else:
+                    resList.append(strAdj + "Nenhum")
 
         resultado = Resultado("\n".join(resList), self.qmw)
         resultado.centerToMainWindow()
@@ -149,7 +170,7 @@ class MainWindow(Ui_MainWindow):
             self.modelConexao.removeRow(index.row())
 
     def removeConexao(self, a):
-        self.grafo.removeConexao(a['value'])
+        self.grafo.removeConexao(a['value'].split('|')[1])
         self.modelConexao.removeRow(a['index'])
 
     def removeAresta(self, a):

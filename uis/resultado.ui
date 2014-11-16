@@ -15,7 +15,11 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QTextBrowser" name="tbResultado"/>
+    <widget class="QTextBrowser" name="tbResultado">
+     <property name="tabStopWidth">
+      <number>40</number>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0">
     <widget class="QPushButton" name="pushFechar">

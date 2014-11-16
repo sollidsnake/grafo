@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'uis/mainwindow.ui'
 #
-# Created: Thu Nov 13 19:06:12 2014
+# Created: Sun Nov 16 19:33:05 2014
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(614, 609)
+        MainWindow.resize(614, 640)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
         self.gridLayout = QtGui.QGridLayout(self.centralWidget)
@@ -233,7 +233,7 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.checkAdjacencia, self.pushGerar)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Grafo", None))
         self.groupBox.setTitle(_translate("MainWindow", "Grafo", None))
         self.groupBox_3.setTitle(_translate("MainWindow", "Vértices", None))
         self.pushAddVertice.setText(_translate("MainWindow", "A&dicionar", None))
@@ -250,13 +250,13 @@ class Ui_MainWindow(object):
         self.groupBox_6.setTitle(_translate("MainWindow", "Identificar", None))
         self.checkExisteLaco.setText(_translate("MainWindow", "Existência de laços", None))
         self.checkExisteParalela.setText(_translate("MainWindow", "Existência de arestas paralelas", None))
-        self.checkExisteIsolado.setText(_translate("MainWindow", "Existência de nó isolado", None))
-        self.checkGrau.setText(_translate("MainWindow", "Grau de cada nó", None))
-        self.checkAdjacencia.setText(_translate("MainWindow", "Adjacência dos nós", None))
+        self.checkExisteIsolado.setText(_translate("MainWindow", "Existência de vértice isolado", None))
+        self.checkGrau.setText(_translate("MainWindow", "Grau de cada vértice", None))
+        self.checkAdjacencia.setText(_translate("MainWindow", "Adjacência dos vértices", None))
         self.checkOrdem.setText(_translate("MainWindow", "Ordem do grafo", None))
         self.checkExisteCiclo.setText(_translate("MainWindow", "Existência de ciclos", None))
         self.checkConexo.setText(_translate("MainWindow", "Se é conexo", None))
-        self.checkCaminhoCurto.setText(_translate("MainWindow", "Caminho mais curto", None))
+        self.checkCaminhoCurto.setText(_translate("MainWindow", "Existe caminho:", None))
         self.pushGerar.setText(_translate("MainWindow", "&Gerar", None))
         self.menuArquivo.setTitle(_translate("MainWindow", "A&rquivo", None))
         self.actionSair.setText(_translate("MainWindow", "Sa&ir", None))
