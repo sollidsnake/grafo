@@ -8,7 +8,6 @@ class Grafo(object):
     lacos = []
     matrizIncidencia = {}
     isDirecionado = False
-    conexoesSemDirecao = {}
 
     def __init__(self, matriz=None):
         if matriz:
@@ -59,6 +58,7 @@ class Grafo(object):
 
     def setDirecionado(self, direcionado):
         self.conexoesComDirecao = deepcopy(self.conexoes)
+
         
         if direcionado == True:
 
@@ -151,9 +151,18 @@ class Grafo(object):
 
     def getGrau(self, v):
         grau = 0
+        grauReceptivo = 0
+
         for v1, a, v2 in self.conexoesComDirecao:
             peso = self.conexoesComDirecao[v1, a, v2]
-            if v1 == v and peso > 0: grau += 1
+            if v1 == v:
+                if peso > 0:
+                    grau += 1
+                else:
+                    grauReceptivo += 1
+                
+        if self.isDirecionado:
+            return (grau, grauReceptivo)
 
         return grau
 

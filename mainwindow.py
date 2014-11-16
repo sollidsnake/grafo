@@ -119,9 +119,16 @@ class MainWindow(Ui_MainWindow):
 
         if self.checkGrau.isChecked():
             graus = self.grafo.getTodosGraus()
-            resList.append("- Grau de cada vértice:")
+            if self.grafo.isDirecionado:
+                resList.append("- Grau de cada vértice (emissão, recepção):")
+            else:
+                resList.append("- Grau de cada vértice:")
+
             for v in graus.keys():
-                resList.append("  '" + v + "':" + str(graus[v]))
+                if self.grafo.isDirecionado:
+                    resList.append("  '" + v + "': " + str(graus[v][0]) + ", " + str(graus[v][1]))
+                else:
+                    resList.append("  '" + v + "': " + str(graus[v]))
             resList.append("")
 
         if self.checkAdjacencia.isChecked():
