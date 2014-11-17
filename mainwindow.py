@@ -82,7 +82,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if self.checkExisteLaco.isChecked():
             if self.grafo.existeLaco():
-                resList.append("- Existem lacos no grafo.")
+
+                resList.append("- Existem lacos nos seguintes vértices:" + self.grafo.getlaco())
             else:
                 resList.append("- Nao existem lacos no grafo.")
 
