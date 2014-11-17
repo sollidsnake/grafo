@@ -228,7 +228,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.modelConexao = QStandardItemModel(self.listConexoes)
 
         self.sobreUi = SobreUi(self)
-        self.sobreUi.tbAbout.setText("desenvolvido por mim")
+        self.sobreUi.tbAbout.setText(open('sobre.txt').read())
 
         self.events()
 
