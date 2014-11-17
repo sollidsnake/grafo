@@ -10,15 +10,15 @@ if __name__ == '__main__':
     wind = MainWindow()
 
     # inserir para teste
-    # window.addAresta('a')
-    # window.addAresta('b')
-    # window.addAresta('c')
-    # window.addVertice('1')
-    # window.addVertice('2')
-    # window.addVertice('3')
-    # window.addConexao('1', 'a', '2')
-    # window.addConexao('1', 'b', '3')
-    # window.addConexao('3', 'c', '3')
+    wind.addAresta('a')
+    wind.addAresta('b')
+    wind.addAresta('c')
+    wind.addVertice('1')
+    wind.addVertice('2')
+    wind.addVertice('3')
+    wind.addConexao('1', 'a', '2')
+    wind.addConexao('1', 'b', '3')
+    wind.addConexao('3', 'c', '3')
 
     # chama a janela principal
     wind.show()

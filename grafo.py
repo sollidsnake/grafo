@@ -97,12 +97,13 @@ class Grafo(object):
         return False
 
     def getLaco(self):
-         for v1, a, v2 in self.conexoes:
-             peso = self.conexoes[(v1, a, v2)]
-             if v1 == v2 and peso != 0:
-                l = 'Aresta '+a+' em: '+v1
+        for v1, a, v2 in self.conexoes:
+            peso = self.conexoes[(v1, a, v2)]
+            if v1 == v2 and peso != 0:
+                l = '  Aresta '+a+' no vértice '+v1
                 self.lacos.append(l)
-       return self.lacos
+
+        return self.lacos
 
     def getTodasAdjacencias(self):
         adjacencias = {}
