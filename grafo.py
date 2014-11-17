@@ -1,4 +1,5 @@
 import pdb
+
 from copy import deepcopy
 
 class Grafo(object):
@@ -134,6 +135,9 @@ class Grafo(object):
 
     def existeVerticeIsolado(self):
 
+        if not self.conexoesComDirecao:
+            return False
+
         for v in self.vertices:
             for v1, a, v2 in self.conexoesComDirecao:
                 isolado = True
@@ -218,12 +222,10 @@ class Grafo(object):
         return True
 
     def existeCicloParaNo(self, destino):
+        """ Verifica se existe ciclo para o vertice passado por parametro """
 
-        # caminhosTentados = []
-        # caminhoAtual = []
         arestasVisitadas = []
-        vertList = [destino]
-        # vertBlackList = []
+        caminhoPercorrido = [destino]
         adjacentesList = {}
         vertNumTentativas = {}
 
@@ -231,13 +233,15 @@ class Grafo(object):
         if self.temLaco(destino): return True
 
         for v in self.vertices:
+            # monta indice de adjacentes para os nos
             adjacentes = self.getAdjacentes(v)
             adjacentesList[v] = []
             for arestaAdj, vertAdj in adjacentes:
                 adjacentesList[v].append(vertAdj)
 
+        # funcao de busca recursiva
         def buscaCiclo(vertice):
-            if vertice == destino and len(vertList) > 2: return True
+            if vertice == destino and len(caminhoPercorrido) > 2: return True
             adjacentes = self.getAdjacentes(vertice)
             semCaminho = False
             for arestaAdj, vertAdj in adjacentes:
@@ -246,18 +250,15 @@ class Grafo(object):
                     semCaminho = True
                     continue
 
-                # try: vertNumTentativas[vertice] += 1
-                # except: vertNumTentativas[vertice] = 1
-
-                vertList.append(vertAdj)
+                caminhoPercorrido.append(vertAdj)
                 arestasVisitadas.append(arestaAdj)
                 return buscaCiclo(vertAdj)
 
             if semCaminho or len(adjacentes) == 0:
-                if len(vertList) > 1:
-                    vertList.pop()
+                if len(caminhoPercorrido) > 1:
+                    caminhoPercorrido.pop()
 
-                vertTmp = vertList[len(vertList)-1]
+                vertTmp = caminhoPercorrido[len(caminhoPercorrido)-1]
 
                 try: vertNumTentativas[vertTmp] += 1 
                 except: vertNumTentativas[vertTmp] = 1 

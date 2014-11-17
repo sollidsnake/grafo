@@ -15,14 +15,18 @@ def debug_trace():
     pyqtRemoveInputHook()
     set_trace()
 
-class MainWindow(Ui_MainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
     matrizAdjacencia = {}
     grafo = Grafo()
+
+    def closeEvent(self, event):
+        if False: event = QCloseEvent
 
     def alert(self):
         QMessageBox.about(self, "TESTE", "TESTE")
 
     def addVertice(self, vertice):
+        if not vertice: return
         self.modelVertice.appendRow(QStandardItem(vertice))
         self.listVertices.setModel(self.modelVertice)
         self.addToComboVertice(vertice)
@@ -32,6 +36,7 @@ class MainWindow(Ui_MainWindow):
         self.addVertice(self.lineNomeVertice.text())
 
     def addAresta(self, aresta):
+        if not aresta: return
         self.modelAresta.appendRow(QStandardItem(aresta))
         self.listArestas.setModel(self.modelAresta)
         self.comboAresta.addItem(aresta)
@@ -47,6 +52,7 @@ class MainWindow(Ui_MainWindow):
         self.comboCaminhoFim.addItem(text)
 
     def addConexao(self, v1, aresta, v2, peso = 1):
+        if not v1 or not aresta or not v2: return
         conexao = v1 + '|' + aresta + '|' + v2 + '|' + str(peso)
         self.modelConexao.appendRow(QStandardItem(conexao))
         self.grafo.addConexao(v1, aresta, v2, peso)
@@ -144,7 +150,7 @@ class MainWindow(Ui_MainWindow):
                 else:
                     resList.append(strAdj + "Nenhum")
 
-        resultado = Resultado("\n".join(resList), self.qmw)
+        resultado = Resultado("\n".join(resList), self)
         resultado.centerToMainWindow()
         self.resultados.append(resultado)
 
@@ -184,12 +190,13 @@ class MainWindow(Ui_MainWindow):
         self.grafo.removeAresta(a['value'])
         self.modelAresta.removeRow(a['index'])
 
-        self.comboAresta.removeItem(self.comboVertice2.findText(a['value']))
+        self.comboAresta.removeItem(self.comboAresta.findText(a['value']))
 
         toErase = []
         for i in range(self.modelConexao.rowCount()):
             item = self.modelConexao.item(i)
             values = item.text().split('|')
+            print(values)
             if values[1] == str(a['value']):
                 toErase.append(item)
 
@@ -202,12 +209,12 @@ class MainWindow(Ui_MainWindow):
         if False: model = QStandardItem
         self.modelVertice.removeRow(model.row())
 
-    def __init__(self, qmw, parent=None, name=None, fl=0):
-        if False: qmw = QMainWindow
+    def __init__(self, parent=None, name=None, fl=0):
         self.resultados = []
+        QMainWindow.__init__(self)
+
         Ui_MainWindow.__init__(self)
-        Ui_MainWindow.setupUi(self, qmw)
-        self.qmw = qmw
+        Ui_MainWindow.setupUi(self, self)
 
         self.menuArquivo.setTitle("&Arquivo")
 
@@ -219,7 +226,7 @@ class MainWindow(Ui_MainWindow):
         self.modelAresta = QStandardItemModel(self.listArestas)
         self.modelConexao = QStandardItemModel(self.listConexoes)
 
-        self.sobreUi = SobreUi(self.qmw)
+        self.sobreUi = SobreUi(self)
         self.sobreUi.tbAbout.setText("desenvolvido por mim")
 
         self.events()
@@ -263,7 +270,7 @@ class MainWindow(Ui_MainWindow):
         self.sobreUi.centerToMainWindow()
 
     def sair(self):
-        self.qmw.close()
+        self.close()
 
     def show(self):
         super().show()
