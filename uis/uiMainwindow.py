@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'uis/mainwindow.ui'
 #
-# Created: Sun Nov 16 19:33:05 2014
+# Created: Mon Nov 17 22:17:08 2014
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -244,7 +244,7 @@ class Ui_MainWindow(object):
         self.groupBox_4.setTitle(_translate("MainWindow", "Conexões", None))
         self.label.setText(_translate("MainWindow", "Peso:", None))
         self.pushAddConexao.setText(_translate("MainWindow", "A&dicionar", None))
-        self.pushRemoveConexao.setText(_translate("MainWindow", "Remover", None))
+        self.pushRemoveConexao.setText(_translate("MainWindow", "&Remover", None))
         self.groupBox_7.setTitle(_translate("MainWindow", "Opçoes do grafo", None))
         self.checkDirecionado.setText(_translate("MainWindow", "Grafo direcionado", None))
         self.groupBox_6.setTitle(_translate("MainWindow", "Identificar", None))

@@ -234,6 +234,7 @@ class Grafo(object):
         """ Verifica se existe ciclo para o vertice passado por parametro """
 
         arestasVisitadas = []
+        # primeiro vertice do caminho ja é o proprio destino
         caminhoPercorrido = [destino]
         adjacentesList = {}
         vertNumTentativas = {}
@@ -251,27 +252,39 @@ class Grafo(object):
         # funcao de busca recursiva
         def buscaCiclo(vertice):
             if vertice == destino and len(caminhoPercorrido) > 2: return True
+            # pega os adjacentes do no sendo processado
             adjacentes = self.getAdjacentes(vertice)
             semCaminho = False
             for arestaAdj, vertAdj in adjacentes:
                 semCaminho = False
+                # se a aresta ja foi visitada, nao existe caminho,
+                # entao vai pro proximo vertice
                 if arestaAdj in arestasVisitadas:
                     semCaminho = True
                     continue
 
+                # vertice percorrido. adiciona a lista
                 caminhoPercorrido.append(vertAdj)
                 arestasVisitadas.append(arestaAdj)
+
+                # chama a funcao novamente. aqui ta a magica.
                 return buscaCiclo(vertAdj)
 
             if semCaminho or len(adjacentes) == 0:
+                # se o vertice é um beco sem saida, removo do meu caminhoPercorrido
+                # e volto pro vertice anterior a ele 
                 if len(caminhoPercorrido) > 1:
                     caminhoPercorrido.pop()
 
+                # pega o ultimo vertice do caminho
                 vertTmp = caminhoPercorrido[len(caminhoPercorrido)-1]
 
                 try: vertNumTentativas[vertTmp] += 1 
                 except: vertNumTentativas[vertTmp] = 1 
 
+                # se o numero de tentativas pro vertice atual for maior
+                # que a quantidade de adjacencias que ele tem, nao existe
+                # caminho atraves dele
                 if vertNumTentativas[vertTmp] > len(adjacentesList[vertTmp]):
                     return False
 
