@@ -97,13 +97,22 @@ class Grafo(object):
         return False
 
     def getLaco(self):
+        lacos = []
         for v1, a, v2 in self.conexoes:
             peso = self.conexoes[(v1, a, v2)]
             if v1 == v2 and peso != 0:
-                l = '  Aresta ' + a + ' no vértice '+v1
-                self.lacos.append(l)
+                l = '  Aresta \'' + a + '\' no vértice \'' + v1 + '\''
+                lacos.append(l)
 
-        return self.lacos
+        return lacos
+
+    def getArestasParalelas(self):
+        ligacoes = {}
+        for v1, a, v2 in self.conexoes:
+            try: ligacoes[v1, v2] += 1
+            except: ligacoes[v1, v2] = 1
+
+        print(ligacoes)
 
     def getTodasAdjacencias(self):
         adjacencias = {}
@@ -223,6 +232,9 @@ class Grafo(object):
         return False
 
     def isConexo(self):
+        if self.existeVerticeIsolado():
+            return False
+
         for v1 in self.vertices:
             for v2 in self.vertices:
                 if self.existeCaminho(v1, v2, []) == False:
